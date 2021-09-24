@@ -13,13 +13,19 @@ def buildCipher(key = None):
     random.shuffle(cipher)
 
     encCipher = dict(zip(alpha, cipher))
-    decCipher = dict(map(reversed, encCipher.items()))
 
-    return [encCipher, decCipher] #returns a dictionary of alpha: cipher
+    return encCipher  #returns a dictionary of alpha: cipher
+
+enckey = buildCipher()
+deckey = enckey.copy()
+
+revkey = dict(map(reversed, deckey.items()))
+
+print(enckey)
+print("---------")
+print(revkey)
 
 
-
-print("dec cipher: " + buildCipher()[1])
 
 
 '''
