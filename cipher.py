@@ -14,7 +14,7 @@ def buildCipher(key = None):
 
     encCipher = dict(zip(alpha, cipher))
 
-    return encCipher  #returns a dictionary of alpha: cipher
+    return encCipher 
 
 encryption_key_pair = buildCipher() 
 decryption_key_pair = dict(map(reversed, encryption_key_pair.copy().items()))
@@ -23,7 +23,7 @@ print('key creation successful!')
 
 def encrypt(eKey):
     etext = []
-    usertext = input("enter someshit")
+    usertext = input("enter someshit: ")
     for i in usertext:
         etext.append(eKey.get(i,i))
     return ''.join(etext)
@@ -38,14 +38,3 @@ def decrypt(secret, dKey):
     return ''.join(dtext)
 
 print("decryption: " + decrypt(secretmsg, decryption_key_pair))
-
-'''
-file = open(sys.argv[1], 'r')
-while 1:
-    char = file.read(1)
-    if not char:
-        break
-    print(char)
-
-file.close()
-'''
