@@ -16,17 +16,28 @@ def buildCipher(key = None):
 
     return encCipher  #returns a dictionary of alpha: cipher
 
-enckey = buildCipher()
-deckey = enckey.copy()
+encryption_key_pair = buildCipher() 
+decryption_key_pair = dict(map(reversed, encryption_key_pair.copy().items()))
 
-revkey = dict(map(reversed, deckey.items()))
+print('key creation successful!')
 
-print(enckey)
-print("---------")
-print(revkey)
+def encrypt(eKey):
+    etext = []
+    usertext = input("enter someshit")
+    for i in usertext:
+        etext.append(eKey.get(i,i))
+    return ''.join(etext)
 
+secretmsg = encrypt(encryption_key_pair)
+print("encryption: " + secretmsg)
 
+def decrypt(secret, dKey):
+    dtext = []
+    for i in secret:
+        dtext.append(dKey.get(i,i))
+    return ''.join(dtext)
 
+print("decryption: " + decrypt(secretmsg, decryption_key_pair))
 
 '''
 file = open(sys.argv[1], 'r')
