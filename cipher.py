@@ -3,6 +3,7 @@ Author: HK
 About: Implementation of monoalphabetic cipher
 '''
 import random, string
+import sys
 
 #func creates a random key value pair for encryption
 def settingUpCipherKey():
@@ -13,4 +14,12 @@ def settingUpCipherKey():
 
     return key
 
-print(settingUpCipherKey())
+file = open(sys.argv[1], 'r')
+while 1:
+    char = file.read(1)
+    if not char:
+        break
+    print(settingUpCipherKey())
+    print(char)
+
+file.close()
