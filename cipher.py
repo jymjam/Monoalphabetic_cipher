@@ -21,20 +21,27 @@ decryption_key_pair = dict(map(reversed, encryption_key_pair.copy().items()))
 
 print('key creation successful!')
 
-def encrypt(eKey):
-    etext = []
-    usertext = input("enter someshit: ")
-    for i in usertext:
-        etext.append(eKey.get(i,i))
-    return ''.join(etext)
+def encrypt(text_to_encrypt, eKey):
+    encrypted_text = []
+    for i in text_to_encrypt:
+        encrypted_text.append(eKey.get(i,i))
+    return ''.join(encrypted_text)
 
-secretmsg = encrypt(encryption_key_pair)
-print("encryption: " + secretmsg)
+def decrypt(text_to_decrypt, dKey):
+    decrypted_text = []
+    for i in text_to_decrypt:
+        decrypted_text.append(dKey.get(i,i))
+    return ''.join(decrypted_text)
 
-def decrypt(secret, dKey):
-    dtext = []
-    for i in secret:
-        dtext.append(dKey.get(i,i))
-    return ''.join(dtext)
+oFile = open('./sample.txt', 'r')
+fileContent = oFile.read()
 
-print("decryption: " + decrypt(secretmsg, decryption_key_pair))
+tmp = encrypt(fileContent, encryption_key_pair)
+print(tmp)
+
+oFile.close()
+
+print('---------------')
+
+reveal = decrypt(tmp, decryption_key_pair)
+print(reveal)
