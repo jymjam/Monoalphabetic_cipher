@@ -19,29 +19,42 @@ def buildCipher(key = None):
 encryption_key_pair = buildCipher() 
 decryption_key_pair = dict(map(reversed, encryption_key_pair.copy().items()))
 
-print('key creation successful!')
-
+#function to encrypt ascii passed in the argument 
 def encrypt(text_to_encrypt, eKey):
     encrypted_text = []
     for i in text_to_encrypt:
         encrypted_text.append(eKey.get(i,i))
+
     return ''.join(encrypted_text)
 
+#function to decrypt ascii passed in the argumetn
 def decrypt(text_to_decrypt, dKey):
     decrypted_text = []
     for i in text_to_decrypt:
         decrypted_text.append(dKey.get(i,i))
+
     return ''.join(decrypted_text)
 
-oFile = open('./sample.txt', 'r')
-fileContent = oFile.read()
+#main func 
+def main():
+    #check if file in argument
+    if len(sys.argv) < 2:
+        print("example: python3 ./cipher ./encrypt_this.java")
+        quit()
 
-tmp = encrypt(fileContent, encryption_key_pair)
-print(tmp)
+    oFile = open(sys.argv[1], 'r')
+    fileContent = oFile.read()
 
-oFile.close()
+    tmp = encrypt(fileContent, encryption_key_pair)
+    print(tmp)
 
-print('---------------')
+    oFile.close()
 
-reveal = decrypt(tmp, decryption_key_pair)
-print(reveal)
+    print('---------------')
+
+    reveal = decrypt(tmp, decryption_key_pair)
+    print(reveal)
+
+#check if not a module
+if __name__ == '__main__':
+    main()
