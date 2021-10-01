@@ -7,17 +7,19 @@ import sys
 
 #func creates a random key value pair for encryption
 def buildCipher(key = None):
-    keyPool = string.ascii_lowercase + string.digits
-    alpha = list(keyPool)
+    keyPool = string.ascii_lowercase + string.digits #only numbers and alpha; need to add symbols
+    alpha = list(keyPool) # list of alphabets {'a','b','c',....,'9'}
     cipher = list(keyPool)
-    random.shuffle(cipher)
+    random.shuffle(cipher) # shuffle all numbers and slphabets
 
-    encCipher = dict(zip(alpha, cipher))
+    encCipher = dict(zip(alpha, cipher)) #{'a':'z', 'b':'y','9':'i'}
 
-    return encCipher 
+    return encCipher #returing the pair
 
-encryption_key_pair = buildCipher() 
+encryption_key_pair = buildCipher() #encryption key 
+print(encryption_key_pair)
 decryption_key_pair = dict(map(reversed, encryption_key_pair.copy().items()))
+print(decryption_key_pair)
 
 #function to encrypt ascii passed in the argument 
 def encrypt(text_to_encrypt, eKey):
