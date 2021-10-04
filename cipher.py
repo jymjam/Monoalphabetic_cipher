@@ -4,10 +4,11 @@ About: Implementation of monoalphabetic cipher
 '''
 import random, string
 import sys
+from collections import Counter
 
 #func creates a random key value pair for encryption
 def buildCipher(key = None):
-    keyPool = string.ascii_lowercase + string.digits #only numbers and alpha; need to add symbols
+    keyPool = string.ascii_lowercase + string.digits + string.punctuation#only numbers and alpha; need to add symbols
     alpha = list(keyPool) # list of alphabets ['a','b','c','d',....'8','9']
     cipher = list(keyPool) # creates another list same as alpha above
     random.shuffle(cipher) # shuffles cipher list ['z','c','5','l',....,'6','k']
@@ -17,25 +18,28 @@ def buildCipher(key = None):
     return encCipher #returns the pair (encryption key)
 
 encryption_key_pair = buildCipher() # returned dict of buildCipher is the encryption key 
-print(encryption_key_pair) #debug
 decryption_key_pair = dict(map(reversed, encryption_key_pair.copy().items())) #copies encryption key and reverses it
-print(decryption_key_pair) #debug
 
 #function to encrypt ascii passed in the argument 
 def encrypt(text_to_encrypt, eKey): #takes a text and the encryption key
     encrypted_text = []
     for i in text_to_encrypt:
         encrypted_text.append(eKey.get(i,i))
-
     return ''.join(encrypted_text) #encypted text is returned
 
 #function to decrypt ascii passed in the argumetn
-def decrypt(text_to_decrypt, dKey): #takes a text and decryption key
+def decrypt(cipher, dKey): #takes a text and decryption key
     decrypted_text = []
-    for i in text_to_decrypt:
+    for i in cipher:
         decrypted_text.append(dKey.get(i,i))
-
     return ''.join(decrypted_text)
+
+#function to count the frequency of the program
+def frequencyCounter(cipher):
+    return Counter(cipher) #returns character count
+
+def keyGuess(freq):
+    pass
 
 #main func 
 def main():
@@ -52,10 +56,7 @@ def main():
 
     oFile.close()
 
-    print('---------------')
-
-    reveal = decrypt(tmp, decryption_key_pair) #encrypted file decrypted (for debug)
-    print(reveal)
+    frequencyCounter(tmp)
 
 #check if not a module: don't worry about this section
 if __name__ == '__main__':
