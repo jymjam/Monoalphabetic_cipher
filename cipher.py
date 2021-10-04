@@ -19,7 +19,7 @@ def buildCipher(key = None):
 
 encryption_key_pair = buildCipher() # returned dict of buildCipher is the encryption key 
 decryption_key_pair = dict(map(reversed, encryption_key_pair.copy().items())) #copies encryption key and reverses it
-
+print(encryption_key_pair)
 #function to encrypt ascii passed in the argument 
 def encrypt(text_to_encrypt, eKey): #takes a text and the encryption key
     encrypted_text = []
@@ -27,7 +27,7 @@ def encrypt(text_to_encrypt, eKey): #takes a text and the encryption key
         encrypted_text.append(eKey.get(i,i))
     return ''.join(encrypted_text) #encypted text is returned
 
-#function to decrypt ascii passed in the argumetn
+#function to decrypt ascii passed in the argumetn; for testing
 def decrypt(cipher, dKey): #takes a text and decryption key
     decrypted_text = []
     for i in cipher:
@@ -35,11 +35,13 @@ def decrypt(cipher, dKey): #takes a text and decryption key
     return ''.join(decrypted_text)
 
 #function to count the frequency of the program
-def frequencyCounter(cipher):
-    return Counter(cipher) #returns character count
 
-def keyGuess(freq):
-    pass
+def cryptanalysis(cipher):
+    pool = list(string.ascii_lowercase + string.digits + string.punctuation)
+    counted = Counter(cipher)
+    real_count_dict = {k: counted[k] for k in pool if k in counted}
+    print(counted)
+    print(real_count_dict)
 
 #main func 
 def main():
@@ -52,12 +54,11 @@ def main():
     fileContent = oFile.read()
 
     tmp = encrypt(fileContent, encryption_key_pair) #content of the opend file is encrypted
-    print(tmp)
-
+    #print(tmp)
     oFile.close()
 
-    frequencyCounter(tmp)
+    print(cryptanalysis(tmp))
 
-#check if not a module: don't worry about this section
+#if not imported
 if __name__ == '__main__':
     main()
