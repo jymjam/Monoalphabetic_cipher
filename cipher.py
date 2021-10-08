@@ -11,9 +11,9 @@ import os
 def buildCipher():
     keyPool = string.ascii_lowercase + string.digits + string.punctuation + string.whitespace #only numbers and alpha;
     alpha = list(keyPool) # list of alphabets ['a','b','c','d',....'8','9']
-    cipher = list(keyPool) # creates another list same as alpha above
-    random.shuffle(cipher) # shuffles cipher list ['z','c','5','l',....,'6','k']
-    encCipher = dict(zip(alpha, cipher)) #creates a {alpha:cipher} dictionary {'a':'z','b':'c',...,'8':'6','9':'k'}
+    alphaCopy = list(keyPool) # creates another list same as alpha above
+    random.shuffle(alphaCopy) # shuffles cipher list ['z','c','5','l',....,'6','k']
+    encCipher = dict(zip(alpha, alphaCopy)) #creates a {alpha:cipher} dictionary {'a':'z','b':'c',...,'8':'6','9':'k'}
     return encCipher 
 
 encryption_key_pair = buildCipher() # returned dict of buildCipher is the encryption key 
@@ -71,6 +71,8 @@ def main():
         -------------------------------------------------------
         ''')
         userInput = str(input("enter your choice: "))
+        print("\n")
+
         if userInput == '0':
             break
         elif userInput == '1':
@@ -79,7 +81,7 @@ def main():
             print(decrypt(encryptedText, decryption_key_pair))
         elif userInput == '3':
             #print(decrypt(encryptedText, guessedKey))
-            pass
+            print(guessedKey)
         elif userInput == '4':
             print(encryptedText)
         elif userInput == '?':
