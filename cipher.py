@@ -5,6 +5,7 @@ About: Implementation of monoalphabetic cipher
 from collections import Counter
 import random, string
 import sys
+import os
 
 #func creates a random key value pair for encryption
 def buildCipher():
@@ -57,15 +58,17 @@ def main():
     oFile.close()
 
     guessedKey = {"a":'7', "b": '5'}
-    print('cipher is : ')
-    print(encryptedText)
 
     while True:
         print('''
-        1 : show true decryption key
-        2: decrypt cipher using true decryption key
-        3: show guessed key(s)
+        ------------------------MENU---------------------------
+        1: show true decryption key (for debug)
+        2: decrypt cipher using true decryption key (for debug)
+        3: show guessed key(s) using cryptanalysis
+        4: show cipher/encryped text
         0: exit the program
+        ?: to get surprised!!
+        -------------------------------------------------------
         ''')
         userInput = str(input("enter your choice: "))
         if userInput == '0':
@@ -75,7 +78,12 @@ def main():
         elif userInput == '2':
             print(decrypt(encryptedText, decryption_key_pair))
         elif userInput == '3':
-            print(decrypt(encryptedText, guessedKey))
+            #print(decrypt(encryptedText, guessedKey))
+            pass
+        elif userInput == '4':
+            print(encryptedText)
+        elif userInput == '?':
+            os.system("start \"\" https://www.youtube.com/watch?v=HIcSWuKMwOw")
         else:
             print('unknown input, try again!')
 
