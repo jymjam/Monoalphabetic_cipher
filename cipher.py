@@ -104,6 +104,7 @@ def main():
         elif userInput == '2':
             print(decrypt(encryptedText, decryption_key_pair))
         elif userInput == '3':
+            print("Program confidently guesses following to be accurate substitution for decryption\n")
             print(cryptAnalysis(fileContent, encryptedText)[2])
         elif userInput == '4':
             print(encryptedText)
