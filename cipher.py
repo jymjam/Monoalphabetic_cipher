@@ -38,13 +38,29 @@ def decrypt(cipher, dKey): #takes a text and decryption key
 def cryptAnalysis(plainText, cipher):
     pool = list(string.ascii_letters + string.digits + string.punctuation + string.whitespace)
 
-    cipherTextFrequencyCounter = Counter(cipher)
     plainTextFrequencyCounter = Counter(plainText)
+    cipherTextFrequencyCounter = Counter(cipher)
 
-    cipher_count_dict = {k: cipherTextFrequencyCounter[k] for k in pool if k in cipherTextFrequencyCounter}
     plain_count_dict = {l: plainTextFrequencyCounter[l] for l in pool if l in plainTextFrequencyCounter}
+    cipher_count_dict = {k: cipherTextFrequencyCounter[k] for k in pool if k in cipherTextFrequencyCounter}
 
     #need to implement certain key:value finder and key guesser
+    cipher_count_tuple_pairs = [(key, val) for key,val in cipher_count_dict.items()]
+    cipher_count_tuple_count = Counter(val for key,val in cipher_count_tuple_pairs)
+    cipher_unique_keys = [key for key,val in cipher_count_tuple_count.items() if val == 1]
+    cipher_unique_list = [(tupl_key,tupl_val) for tupl_key, tupl_val in cipher_count_tuple_pairs if tupl_val in cipher_unique_keys]
+    cipher_unique_dict = {key:val for key,val in cipher_unique_list}
+
+    plain_count_tuple_pairs = [(key, val) for key,val in plain_count_dict.items()]
+    plain_count_tuple_count = Counter(val for key,val in plain_count_tuple_pairs)
+    plain_unique_keys = [key for key,val in plain_count_tuple_count.items() if val == 1]
+    plain_unique_list = [(tupl_key,tupl_val) for tupl_key, tupl_val in plain_count_tuple_pairs if tupl_val in plain_unique_keys]
+    plain_unique_dict = {key:val for key,val in plain_unique_list}
+
+    print(plain_unique_dict)
+    print('------------------------------------------')
+    print(cipher_unique_dict)
+
 
 #main func 
 def main():
@@ -58,7 +74,6 @@ def main():
     encryptedText = encrypt(fileContent, encryption_key_pair) #content of the opend file is encrypted
     oFile.close()
 
-    cryptAnalysis(fileContent, encryptedText)
     guessedKey = {"a":'7', "b": '5'}
 
     menu = ('''
@@ -95,7 +110,7 @@ def main():
         elif userInput == '4':
             print(encryptedText)
         elif userInput == '5':
-            pass
+            cryptAnalysis(fileContent, encryptedText)
         elif userInput == '6':
             pass
         elif userInput == '?':
