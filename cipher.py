@@ -9,7 +9,7 @@ import os
 
 #func creates a random key value pair for encryption
 def buildCipher():
-    keyPool = string.ascii_lowercase + string.digits + string.punctuation + string.whitespace #only numbers and alpha;
+    keyPool = string.ascii_letters + string.digits + string.punctuation + string.whitespace #only numbers and alpha;
     alpha = list(keyPool) # list of alphabets ['a','b','c','d',....'8','9']
     alphaCopy = list(keyPool) # creates another list same as alpha above
     random.shuffle(alphaCopy) # shuffles cipher list ['z','c','5','l',....,'6','k']
@@ -32,11 +32,11 @@ def decrypt(cipher, dKey): #takes a text and decryption key
     for i in cipher:
         decrypted_text.append(dKey.get(i,i))
     return ''.join(decrypted_text)
-#-----------------------------------------------------DO NOT TOUCH ABOVE--------------------------------
+#----------------------------------------DO NOT TOUCH ABOVE---------------------------------------
 
 #function to count the frequency of the cipher 
 def cryptAnalysis(plainText, cipher):
-    pool = list(string.ascii_lowercase + string.digits + string.punctuation + string.whitespace)
+    pool = list(string.ascii_letters + string.digits + string.punctuation + string.whitespace)
 
     cipherTextFrequencyCounter = Counter(cipher)
     plainTextFrequencyCounter = Counter(plainText)
@@ -44,6 +44,7 @@ def cryptAnalysis(plainText, cipher):
     cipher_count_dict = {k: cipherTextFrequencyCounter[k] for k in pool if k in cipherTextFrequencyCounter}
     plain_count_dict = {l: plainTextFrequencyCounter[l] for l in pool if l in plainTextFrequencyCounter}
 
+    #need to implement certain key:value finder and key guesser
 
 #main func 
 def main():
@@ -57,37 +58,50 @@ def main():
     encryptedText = encrypt(fileContent, encryption_key_pair) #content of the opend file is encrypted
     oFile.close()
 
+    cryptAnalysis(fileContent, encryptedText)
     guessedKey = {"a":'7', "b": '5'}
 
+    menu = ('''
+    ------------------------MENU---------------------------
+    1: show true decryption key (for debug)
+    2: decrypt cipher using true decryption key (for debug)
+    3: show guessed key(s) using cryptanalysis
+    4: show cipher/encryped text
+    5: show cipehr text frequency count
+    6: show plain text frequency count
+    -------------------------------------------------------
+    0: exit the program
+    ?: to get surprised!!
+    -------------------------------------------------------
+    ''')
+
+    print(menu)
+
     while True:
-        print('''
-        ------------------------MENU---------------------------
-        1: show true decryption key (for debug)
-        2: decrypt cipher using true decryption key (for debug)
-        3: show guessed key(s) using cryptanalysis
-        4: show cipher/encryped text
-        0: exit the program
-        ?: to get surprised!!
-        -------------------------------------------------------
-        ''')
-        userInput = str(input("enter your choice: "))
+        print('\n')
+        userInput = str(input("enter your choice (press m for menu): "))
         print("\n")
 
         if userInput == '0':
             break
+        elif userInput == 'm':
+            print(menu)
         elif userInput == '1':
             print(decryption_key_pair)
         elif userInput == '2':
             print(decrypt(encryptedText, decryption_key_pair))
         elif userInput == '3':
-            #print(decrypt(encryptedText, guessedKey))
             print(guessedKey)
         elif userInput == '4':
             print(encryptedText)
+        elif userInput == '5':
+            pass
+        elif userInput == '6':
+            pass
         elif userInput == '?':
             os.system("start \"\" https://www.youtube.com/watch?v=HIcSWuKMwOw")
         else:
-            print('unknown input, try again!')
+            print('unknown input, try again!\n')
 
 #if not imported
 if __name__ == '__main__':
