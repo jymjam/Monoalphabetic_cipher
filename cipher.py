@@ -83,6 +83,7 @@ def main():
     5: show cipher text frequency count
     6: show plain text frequency count
     7: decrypt cipher using guessed key
+    8: show encryption key used to encrypt
     -------------------------------------------------------
     h: Show this menu again
     ?: to get surprised!!
@@ -91,8 +92,6 @@ def main():
     ''')
 
     print(menu)
-
-    print(encryption_key_pair)
 
     while True:
         print('\n')
@@ -118,6 +117,8 @@ def main():
             print(cryptAnalysis(fileContent,encryptedText)[0])
         elif userInput == '7':
             print(decrypt(encryptedText, cryptAnalysis(fileContent, encryptedText)[2]))
+        elif userInput == '8':
+            print(encryption_key_pair)
         elif userInput == '?':
             os.system("start \"\" https://www.youtube.com/watch?v=HIcSWuKMwOw")
         else:
