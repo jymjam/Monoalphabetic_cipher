@@ -59,7 +59,7 @@ def cryptAnalysis(plainText, cipher):
     sorted_plain_unique_dict = dict(sorted(plain_unique_dict.items(), key = lambda kv:kv[1]))
 
     #returns dict certain guessed key; can be cross verified with true decryption key
-    certainGuessDecryptionKey = dict(zip(sorted_plain_unique_dict, sorted_cipher_unique_dict))
+    certainGuessDecryptionKey = dict(zip(sorted_cipher_unique_dict, sorted_plain_unique_dict))
     return [cipherTextFrequencyCounter, plainTextFrequencyCounter, certainGuessDecryptionKey]
 
 #main func 
@@ -75,29 +75,33 @@ def main():
     oFile.close()
 
     menu = ('''
-    ------------------------MENU---------------------------
+    -------------------------------------------------------
     1: show true decryption key (for debug)
     2: decrypt cipher using true decryption key (for debug)
     3: show confident guessed key(s) using cryptanalysis
     4: show cipher (encryped text)
     5: show cipher text frequency count
     6: show plain text frequency count
+    7: decrypt cipher using guessed key
     -------------------------------------------------------
-    0: exit the program
+    h: Show this menu again
     ?: to get surprised!!
+    0: exit the program
     -------------------------------------------------------
     ''')
 
     print(menu)
 
+    print(encryption_key_pair)
+
     while True:
         print('\n')
-        userInput = str(input("enter your choice (press m for menu): "))
+        userInput = str(input("root@win.dos:/root# "))
         print("\n")
 
         if userInput == '0':
             break
-        elif userInput == 'm':
+        elif userInput == 'h':
             print(menu)
         elif userInput == '1':
             print(decryption_key_pair)
@@ -112,10 +116,12 @@ def main():
             print(cryptAnalysis(fileContent, encryptedText)[1])
         elif userInput == '6':
             print(cryptAnalysis(fileContent,encryptedText)[0])
+        elif userInput == '7':
+            print(decrypt(encryptedText, cryptAnalysis(fileContent, encryptedText)[2]))
         elif userInput == '?':
             os.system("start \"\" https://www.youtube.com/watch?v=HIcSWuKMwOw")
         else:
-            print('unknown input, try again!\n')
+            print('lol this is not a shell, (press h for help)!\n')
 
 #if not imported
 if __name__ == '__main__':
