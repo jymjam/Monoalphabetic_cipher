@@ -6,6 +6,6 @@ TO DO:
     monoalphabetic keys. 
 - [x] Program to detect all characters and symbols used in Java 
     and count their respective frequency.
-- [ ] Program to guess the encryption/decryption key using 
+- [x] Program to guess the encryption/decryption key using 
     cryptanalysis.
 - [ ] Write a report
