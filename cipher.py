@@ -60,7 +60,7 @@ def cryptAnalysis(plainText, cipher):
 
     #returns dict certain guessed key; can be cross verified with true decryption key
     certainGuessDecryptionKey = dict(zip(sorted_plain_unique_dict, sorted_cipher_unique_dict))
-    print(certainGuessDecryptionKey)
+    return [cipherTextFrequencyCounter, plainTextFrequencyCounter, certainGuessDecryptionKey]
 
 #main func 
 def main():
@@ -74,15 +74,13 @@ def main():
     encryptedText = encrypt(fileContent, encryption_key_pair) #content of the opend file is encrypted
     oFile.close()
 
-    guessedKey = {"a":'7', "b": '5'}
-
     menu = ('''
     ------------------------MENU---------------------------
     1: show true decryption key (for debug)
     2: decrypt cipher using true decryption key (for debug)
-    3: show guessed key(s) using cryptanalysis
-    4: show cipher/encryped text
-    5: show cipehr text frequency count
+    3: show confident guessed key(s) using cryptanalysis
+    4: show cipher (encryped text)
+    5: show cipher text frequency count
     6: show plain text frequency count
     -------------------------------------------------------
     0: exit the program
@@ -106,13 +104,13 @@ def main():
         elif userInput == '2':
             print(decrypt(encryptedText, decryption_key_pair))
         elif userInput == '3':
-            print(guessedKey)
+            print(cryptAnalysis(fileContent, encryptedText)[2])
         elif userInput == '4':
             print(encryptedText)
         elif userInput == '5':
-            cryptAnalysis(fileContent, encryptedText)
+            print(cryptAnalysis(fileContent, encryptedText)[1])
         elif userInput == '6':
-            pass
+            print(cryptAnalysis(fileContent,encryptedText)[0])
         elif userInput == '?':
             os.system("start \"\" https://www.youtube.com/watch?v=HIcSWuKMwOw")
         else:
