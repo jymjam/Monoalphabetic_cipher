@@ -37,30 +37,30 @@ def decrypt(cipher, dKey): #takes a text and decryption key
 #function to count the frequency of the cipher 
 def cryptAnalysis(plainText, cipher):
     pool = list(string.ascii_letters + string.digits + string.punctuation + string.whitespace)
-
     plainTextFrequencyCounter = Counter(plainText)
     cipherTextFrequencyCounter = Counter(cipher)
-
     plain_count_dict = {l: plainTextFrequencyCounter[l] for l in pool if l in plainTextFrequencyCounter}
     cipher_count_dict = {k: cipherTextFrequencyCounter[k] for k in pool if k in cipherTextFrequencyCounter}
 
-    #need to implement certain key:value finder and key guesser
+    #finds unique values for keys in cipher dict
     cipher_count_tuple_pairs = [(key, val) for key,val in cipher_count_dict.items()]
     cipher_count_tuple_count = Counter(val for key,val in cipher_count_tuple_pairs)
     cipher_unique_keys = [key for key,val in cipher_count_tuple_count.items() if val == 1]
     cipher_unique_list = [(tupl_key,tupl_val) for tupl_key, tupl_val in cipher_count_tuple_pairs if tupl_val in cipher_unique_keys]
     cipher_unique_dict = {key:val for key,val in cipher_unique_list}
+    sorted_cipher_unique_dict = dict(sorted(cipher_unique_dict.items(), key = lambda kv:kv[1]))
 
+    #finds unique values for keys in plain dict
     plain_count_tuple_pairs = [(key, val) for key,val in plain_count_dict.items()]
     plain_count_tuple_count = Counter(val for key,val in plain_count_tuple_pairs)
     plain_unique_keys = [key for key,val in plain_count_tuple_count.items() if val == 1]
     plain_unique_list = [(tupl_key,tupl_val) for tupl_key, tupl_val in plain_count_tuple_pairs if tupl_val in plain_unique_keys]
     plain_unique_dict = {key:val for key,val in plain_unique_list}
+    sorted_plain_unique_dict = dict(sorted(plain_unique_dict.items(), key = lambda kv:kv[1]))
 
-    print(plain_unique_dict)
-    print('------------------------------------------')
-    print(cipher_unique_dict)
-
+    #returns dict certain guessed key; can be cross verified with true decryption key
+    certainGuessDecryptionKey = dict(zip(sorted_plain_unique_dict, sorted_cipher_unique_dict))
+    print(certainGuessDecryptionKey)
 
 #main func 
 def main():
