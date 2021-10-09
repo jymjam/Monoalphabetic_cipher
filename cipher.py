@@ -112,7 +112,7 @@ def main():
             substitution for partial decryption using cryptanalysis
 
             can be cross verified with the decryption key (option 1)
-            ''')
+            \n''')
             print(cryptAnalysis(fileContent, encryptedText)[2])
         elif userInput == '4':
             print(encryptedText)
