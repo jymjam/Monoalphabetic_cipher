@@ -52,7 +52,7 @@ def cryptAnalysis(plainText, cipher):
     cipher_unique_keys = [key for key,val in cipher_count_tuple_count.items() if val == 1]
     cipher_unique_list = [(tupl_key,tupl_val) for tupl_key, tupl_val in cipher_count_tuple_pairs if tupl_val in cipher_unique_keys]
     cipher_unique_dict = {key:val for key,val in cipher_unique_list}
-    # sorts dict: new_dict = {'c':7,'e':3, 'a':1}
+    # sorts dict: cipher_unique_dict = {'c':7,'e':3, 'a':1}
     sorted_cipher_unique_dict = dict(sorted(cipher_unique_dict.items(), key = lambda kv:kv[1]))
 
     #finds unique values for keys in plain dict (does the same as above 6 lines but on plain_text frequency dict)
