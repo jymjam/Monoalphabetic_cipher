@@ -43,9 +43,9 @@ def cryptAnalysis(plainText, cipher):
 
     #finds unique values for keys in cipher dict
     '''extracts unique values keys from the frequency dict. e.g (assume)
-    cipher_count = {'a':1, 'b':5, 'c':7, 'd':5, 'e': 3}
+    cipher_count = {'a':1, 'b':5, 'c':7, 'd':5, 'e': 3 }
     after this the below block on some_dict we get
-    cipher_unique_dict = {'a':1, 'c':7, 'e':3}
+    cipher_unique_dict = {'a':1, 'c':7, 'e':3 }
     '''
     cipher_count_tuple_pairs = [(key, val) for key,val in cipher_count_dict.items()]
     cipher_count_tuple_count = Counter(val for key,val in cipher_count_tuple_pairs)
