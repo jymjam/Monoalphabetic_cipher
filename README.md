@@ -5,7 +5,7 @@ TO DO:
 - [x] Algorithm to encrypt and decrypt any Java code using
     monoalphabetic keys. 
 - [x] Program to detect all characters and symbols used in Java 
-    and count their respective frequency.
+    and perform frequency analysis.
 - [x] Program to guess the encryption/decryption key using 
     cryptanalysis.
 - [ ] Write a report
