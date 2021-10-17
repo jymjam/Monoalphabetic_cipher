@@ -84,20 +84,22 @@ def main():
     oFile.close()
 
     menu = ('''
-    -------------------------------------------------------
-    1: show true decryption key (for debug)
-    2: decrypt cipher using true decryption key (for debug)
-    3: show confident guessed key(s) using cryptanalysis
-    4: show cipher (encryped text)
-    5: show cipher text frequency count
-    6: show plain text frequency count
-    7: decrypt cipher using guessed key
-    8: show encryption key used to encrypt
-    -------------------------------------------------------
+    -------------------------------------------
+    to show, press:
+
+    1: Real decryption key
+    2: Decrypt cipher using decryption key
+    3: Guessed key(s) using cryptanalysis
+    4: Cipher 
+    5: frequency analysis on cipher text
+    6: frequency analysis on plain text
+    7: Decrypt cipher using guessed key
+    8: Real encryption key 
+    ------------------------------------------
     h: Show this menu again
-    ?: to get surprised!!
-    0: exit the program
-    -------------------------------------------------------
+    ?: To get surprised!!
+    0: Exit
+    ------------------------------------------
     ''')
 
     print(menu)
@@ -105,7 +107,7 @@ def main():
     # if else ladder
     while True:
         print('\n')
-        userInput = str(input("root@win.dos:/root# "))
+        userInput = str(input("root@win.dos:(h for help)# "))
         print("\n")
 
         if userInput == '0':
