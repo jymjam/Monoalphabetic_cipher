@@ -65,7 +65,7 @@ def cryptAnalysis(plainText, cipher):
 
     #returns dict certain guessed key; can be cross verified with true decryption key
     ''' assume
-    line 71: e.g. maps cipher_unique_dict = {'c':7, 'e':3, 'a':1} --> plain_unique_dict = {'\n':7, 'x':3, '7':1 }
+    line 71: e.g. maps cipher_unique_dict = {'c':7, 'e':3, 'a':1 } --> plain_unique_dict = {'\n':7, 'x':3, '7':1 }
     we get certainGuessedDecryptionKey = { '\n':'c', 'e':'x', '7':'a' }
     '''
     certainGuessDecryptionKey = dict(zip(sorted_cipher_unique_dict, sorted_plain_unique_dict))
