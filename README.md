@@ -8,4 +8,4 @@ TO DO:
     and perform frequency analysis.
 - [x] Program to guess the encryption/decryption key using 
     cryptanalysis.
-- [ ] Write a report
+- [x] Write a report
