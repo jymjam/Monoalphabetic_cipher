@@ -1,4 +1,4 @@
-'''
+'''PART 2 - Enhanced encryption security
 Author: HK
 About: Implementation of monoalphabetic cipher
 '''
