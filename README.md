@@ -1,5 +1,9 @@
 ### Monoalphabetic cipher implementation in python
-
+To Do:
+- [ ] Enhance encryption security to beat cryptanalysis
+- [ ] Perform frequency analysis on new implementation
+- [ ] draft a report.
+---
 TO DO:
 - [x] Algorithm to generate encryption & decryption keys.
 - [x] Algorithm to encrypt and decrypt any Java code using
