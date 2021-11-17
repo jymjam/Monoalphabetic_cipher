@@ -1,4 +1,5 @@
 ### Monoalphabetic cipher implementation in python
+No extra dependencies; just copy and run in python3.X env
 
 TO DO:
 - [x] Algorithm to generate encryption & decryption keys.
