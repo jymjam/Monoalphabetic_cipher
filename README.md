@@ -2,8 +2,8 @@
 No extra dependencies; just download and run with python3.X
 
 To Do (part 2):
-- [ ] Enhance encryption security to beat cryptanalysis
-- [ ] Perform frequency analysis on new implementation
+- [x] Enhance encryption security to beat cryptanalysis
+- [x] Perform frequency analysis on new implementation
 - [ ] draft a report.
 ---
 To Do (part 1):
