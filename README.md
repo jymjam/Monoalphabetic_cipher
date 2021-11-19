@@ -1,5 +1,5 @@
 ### Monoalphabetic cipher implementation in python
-No extra dependencies; just copy and run in python3.X env
+No extra dependencies; just download and run with python3.X
 
 To Do (part 2):
 - [ ] Enhance encryption security to beat cryptanalysis
