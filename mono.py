@@ -7,11 +7,10 @@ import random, string
 import sys
 #import os
 
-superCharPool = string.ascii_letters + string.digits + string.punctuation + string.whitespace
+superCharPool = string.ascii_letters + string.digits + string.punctuation + string.whitespace #obj contains all printable chars
 
 #func creates a random key value pair for encryption
 def buildKey():
-    #keyPool = string.ascii_letters + string.digits + string.punctuation + string.whitespace #contains all printable characters;
     keyPool = superCharPool
     alpha = list(keyPool) # list of all printable chara. e.g ['a','b','c','d',...'8','9',...,'\n','\r',...]
     alphaCopy = list(keyPool) # creates another list same as alpha above
@@ -22,7 +21,7 @@ def buildKey():
 encryption_key_pair = buildKey() # returned dict of buildCipher is the encryption key 
 decryption_key_pair = dict(map(reversed, encryption_key_pair.copy().items())) #copies encryption key and reverses it
 
-def encrypt2_0(text_to_encrypt, eKey):
+def encrypt2_0(text_to_encrypt):
     plain_text_counter_dict = dict(Counter(text_to_encrypt))
     most_repetitive_char_count = 0
     for key, value in plain_text_counter_dict.items():
@@ -30,7 +29,15 @@ def encrypt2_0(text_to_encrypt, eKey):
             most_repetitive_char_count = value
             most_repetitive_char = key
 
-    
+    sorted_plain_text_counter_dict = dict(sorted(plain_text_counter_dict.items(), key = lambda e:e[1])) 
+
+    del sorted_plain_text_counter_dict[most_repetitive_char]
+
+    padding_list = []
+    for key,value in sorted_plain_text_counter_dict.items():
+        while value < most_repetitive_char_count:
+            padding_list.append(key)
+            value += 1
 
 
 #function to encrypt ascii passed in the argument 
@@ -49,7 +56,7 @@ def decrypt(cipher, dKey): #takes a text and decryption key
 
 #function to count the frequency of the cipher 
 def cryptAnalysis(plainText, cipher):
-    pool = list(string.ascii_letters + string.digits + string.punctuation + string.whitespace) #pool of all printable chara, same as alpha list in buildcipher() 
+    pool = superCharPool #pool of all printable chara, same as alpha list in buildcipher() 
     plainTextFrequencyCounter = Counter(plainText) #counts all chars in plaintext (frequency) 
     cipherTextFrequencyCounter = Counter(cipher) # counts all chars in cipher
     plain_count_dict = {l: plainTextFrequencyCounter[l] for l in pool if l in plainTextFrequencyCounter} #creates a dict of chars and it's frequency. e.g {'a':40, 'b':12,..., '\n':7}
@@ -154,7 +161,7 @@ def main():
             #os.system("start \"\" https://www.youtube.com/watch?v=HIcSWuKMwOw")
             pass
         elif userInput == 't':
-            encrypt2_0(fileContent, encryption_key_pair)
+            encrypt2_0(fileContent)
         else:
             print('lol this is not a shell, (press h for help)!\n')
 
