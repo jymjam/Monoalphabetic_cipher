@@ -38,6 +38,8 @@ def encrypt2_0(text_to_encrypt):
         while value < most_repetitive_char_count:
             padding_list.append(key)
             value += 1
+    
+    print(text_to_encrypt)
 
 
 #function to encrypt ascii passed in the argument 
