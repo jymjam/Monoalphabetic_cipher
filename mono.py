@@ -7,9 +7,12 @@ import random, string
 import sys
 #import os
 
+superCharPool = string.ascii_letters + string.digits + string.punctuation + string.whitespace
+
 #func creates a random key value pair for encryption
 def buildKey():
-    keyPool = string.ascii_letters + string.digits + string.punctuation + string.whitespace #contains all printable characters;
+    #keyPool = string.ascii_letters + string.digits + string.punctuation + string.whitespace #contains all printable characters;
+    keyPool = superCharPool
     alpha = list(keyPool) # list of all printable chara. e.g ['a','b','c','d',...'8','9',...,'\n','\r',...]
     alphaCopy = list(keyPool) # creates another list same as alpha above
     random.shuffle(alphaCopy) # shuffles cipher list ['z','c','5','l',....,'6','k']
@@ -27,7 +30,7 @@ def encrypt2_0(text_to_encrypt, eKey):
             most_repetitive_char_count = value
             most_repetitive_char = key
 
-    print("h{}h".format(most_repetitive_char), most_repetitive_char_count)
+    
 
 
 #function to encrypt ascii passed in the argument 
