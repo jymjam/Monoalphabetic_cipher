@@ -5,7 +5,7 @@ About: Implementation of monoalphabetic cipher
 from collections import Counter
 import random, string
 import sys
-import os
+#import os
 
 #func creates a random key value pair for encryption
 def buildKey():
@@ -20,7 +20,15 @@ encryption_key_pair = buildKey() # returned dict of buildCipher is the encryptio
 decryption_key_pair = dict(map(reversed, encryption_key_pair.copy().items())) #copies encryption key and reverses it
 
 def encrypt2_0(text_to_encrypt, eKey):
-    plain_text_counter = Counter(text_to_encrypt)
+    plain_text_counter_dict = dict(Counter(text_to_encrypt))
+    most_repetitive_char_count = 0
+    for key, value in plain_text_counter_dict.items():
+        if value > most_repetitive_char_count:
+            most_repetitive_char_count = value
+            most_repetitive_char = key
+
+    print("h{}h".format(most_repetitive_char), most_repetitive_char_count)
+
 
 #function to encrypt ascii passed in the argument 
 def encrypt(text_to_encrypt, eKey): #takes a text and the encryption key
@@ -140,7 +148,10 @@ def main():
         elif userInput == '8':
             print(encryption_key_pair)
         elif userInput == '?':
-            os.system("start \"\" https://www.youtube.com/watch?v=HIcSWuKMwOw")
+            #os.system("start \"\" https://www.youtube.com/watch?v=HIcSWuKMwOw")
+            pass
+        elif userInput == 't':
+            encrypt2_0(fileContent, encryption_key_pair)
         else:
             print('lol this is not a shell, (press h for help)!\n')
 
