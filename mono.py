@@ -21,7 +21,7 @@ def buildKey():
 encryption_key_pair = buildKey() # returned dict of buildCipher is the encryption key 
 decryption_key_pair = dict(map(reversed, encryption_key_pair.copy().items())) #copies encryption key and reverses it
 
-def encrypt2_0(text_to_encrypt):
+def padding(text_to_encrypt):
     plain_text_counter_dict = dict(Counter(text_to_encrypt))
     most_repetitive_char_count = 0
     for key, value in plain_text_counter_dict.items():
@@ -42,7 +42,7 @@ def encrypt2_0(text_to_encrypt):
     random.shuffle(padding_list)
     pad = ''.join(padding_list)# convert list to string
 
-    print(text_to_encrypt + pad)
+    return text_to_encrypt + pad
 
 
 #function to encrypt ascii passed in the argument 
@@ -109,6 +109,11 @@ def main():
     encryptedText = encrypt(fileContent, encryption_key_pair) #content of the opend file is encrypted
     oFile.close()
 
+
+    paddedText = padding(fileContent)
+    paddedCipher = encrypt(paddedText, encryption_key_pair)
+
+
     menu = ('''
     -------------------------------------------
     to show, press:
@@ -121,7 +126,14 @@ def main():
     6: frequency analysis on plain text
     7: Decrypt cipher using guessed key
     8: Real encryption key 
-    ------------------------------------------
+    ---------------PART 2---------------------
+    a: show padded text
+    b: encrypt padded text
+    c: decrypt padded cipher with real key
+    d: frequency analysis padded text
+    e: frequency analysis padded cipher
+    f: guessed key
+    ---------------EXTRA----------------------
     h: Show this menu again
     ?: To get surprised!!
     0: Exit
@@ -151,22 +163,30 @@ def main():
 
             can be cross verified with the decryption key (option 1)
             \n''')
-            print(cryptAnalysis(fileContent, encryptedText)[2])
+            print(cryptAnalysis(fileContent, encryptedText)[2]) #guess key
         elif userInput == '4':
             print(encryptedText)
         elif userInput == '5':
-            print(cryptAnalysis(fileContent, encryptedText)[1])
+            print(cryptAnalysis(fileContent, encryptedText)[1]) #freq plain text
         elif userInput == '6':
-            print(cryptAnalysis(fileContent,encryptedText)[0])
+            print(cryptAnalysis(fileContent,encryptedText)[0]) #freq cipher text
         elif userInput == '7':
             print(decrypt(encryptedText, cryptAnalysis(fileContent, encryptedText)[2]))
         elif userInput == '8':
             print(encryption_key_pair)
-        elif userInput == '?':
-            #os.system("start \"\" https://www.youtube.com/watch?v=HIcSWuKMwOw")
-            pass
-        elif userInput == 't':
-            encrypt2_0(fileContent)
+        #-----------------------PART2---------------------
+        elif userInput == 'a':
+            print(paddedText)
+        elif userInput == 'b':
+            print(paddedCipher)
+        elif userInput == 'c':
+            print(decrypt(paddedText, decryption_key_pair))
+        elif userInput == 'd':
+            print(cryptAnalysis(paddedText, paddedCipher)[0]) 
+        elif userInput == 'e':
+            print(cryptAnalysis(paddedText, paddedCipher)[1])
+        elif userInput == 'f':
+            print(cryptAnalysis(paddedText, paddedCipher)[2])
         else:
             print('lol this is not a shell, (press h for help)!\n')
 
