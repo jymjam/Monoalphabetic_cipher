@@ -8,7 +8,7 @@ import sys
 import os
 
 #func creates a random key value pair for encryption
-def buildCipher():
+def buildKey():
     keyPool = string.ascii_letters + string.digits + string.punctuation + string.whitespace #contains all printable characters;
     alpha = list(keyPool) # list of all printable chara. e.g ['a','b','c','d',...'8','9',...,'\n','\r',...]
     alphaCopy = list(keyPool) # creates another list same as alpha above
@@ -16,8 +16,11 @@ def buildCipher():
     encCipher = dict(zip(alpha, alphaCopy)) #creates a {alpha:cipher} dictionary {'a':'z','b':'c',...,'8':'6','9':'k'}
     return encCipher #returning encryption key
 
-encryption_key_pair = buildCipher() # returned dict of buildCipher is the encryption key 
+encryption_key_pair = buildKey() # returned dict of buildCipher is the encryption key 
 decryption_key_pair = dict(map(reversed, encryption_key_pair.copy().items())) #copies encryption key and reverses it
+
+def encrypt2_0(text_to_encrypt, eKey):
+    plain_text_counter = Counter(text_to_encrypt)
 
 #function to encrypt ascii passed in the argument 
 def encrypt(text_to_encrypt, eKey): #takes a text and the encryption key
