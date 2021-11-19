@@ -38,8 +38,11 @@ def encrypt2_0(text_to_encrypt):
         while value < most_repetitive_char_count:
             padding_list.append(key)
             value += 1
-    
-    print(text_to_encrypt)
+
+    random.shuffle(padding_list)
+    pad = ''.join(padding_list)# convert list to string
+
+    print(text_to_encrypt + pad)
 
 
 #function to encrypt ascii passed in the argument 
